@@ -34,17 +34,19 @@
                 </div>
                 <div class="sidebar-brand-text mx-3">Manutenções Preventivas</div>
             </a>
-
-            
             <hr class="sidebar-divider my-0">
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('register')}}"> 
                     <i class="fas fa-fw fa-tachometer-alt"></i> Home
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{url('users')}}"><i class="fas fa-users"></i> Usuários</a>
-            </li>
+            @auth
+            <?php if (Auth::user()->is_admin): ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url('users')}}"><i class="fas fa-users"></i>Usuários</a>
+                </li>
+            <?php endif ?>
+            @endauth
             <li class="nav-item">
                 <a class="nav-link" href="{{url('machines')}}"><i class="fas fa-tractor"></i> Maquinários</a>
             </li>
@@ -55,7 +57,6 @@
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
-
         </ul>
         <!-- End of Sidebar -->
 
@@ -161,7 +162,7 @@ aria-hidden="true">
                 <span aria-hidden="true">×</span>
             </button>
         </div>
-        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-body">Selecione "Logout" abaixo se você estiver pronto para encerrar sua sessão atual.</div>
         <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
             <a class="btn btn-primary" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"> Sair</a>

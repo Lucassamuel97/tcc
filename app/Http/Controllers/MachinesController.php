@@ -45,6 +45,8 @@ class MachinesController extends Controller
 
     public function edit($id){
         $machine = $this->objMachine->find($id);
+
+        
         return view('machines/create',compact('machine'));
     }
 

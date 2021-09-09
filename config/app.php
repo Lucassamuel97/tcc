@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Lets - biblioteca'),
+    'name' => env('APP_NAME', 'Manutenção Preventiva'),
 
     /*
     |--------------------------------------------------------------------------

@@ -37,8 +37,8 @@
 						<div class="form-group col-md-4">
 							<label for="status" class="col-form-label">Status:</label>
 							<select  class="form-control" name="status" id="status">
-								<option value="1" <?php if (@$_row['status'] == 'Ativo'){ echo "selected"; }?>>Ativo</option>
-								<option value="0" <?php if (@$_row['status'] == 'Inativo'){ echo "selected"; }?>>Inativo</option>
+								<option value="1" @if($machine->status === 1) selected @endif>Ativo</option>
+								<option value="0" @if($machine->status === 0) selected @endif>Inativo</option>
 							</select>
 						</div>
 

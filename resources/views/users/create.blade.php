@@ -28,8 +28,8 @@
                         <div class="form-group col-md-4">
                             <label for="is_admin" class="col-form-label">Tipo Usuário:</label>
                             <select  class="form-control" name="is_admin" id="is_admin">
-                                <option value="0">Comum</option>
-                                <option value="1">Administrador</option>
+                                <option value="0" @if($user->is_admin === 0) selected @endif>Comum</option>
+                                <option value="1" @if($user->is_admin === 1) selected @endif>Administrador</option>
                             </select>
                         </div>
 
