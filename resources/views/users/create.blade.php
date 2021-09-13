@@ -6,15 +6,13 @@
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 mt-4 border-bottom">
         <h1 class="h4">Usuário > @if(isset($user))Editar @else Cadastrar @endif</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
-            <a href="{{url('users')}}">
-                <button class="btn btn-sm btn-outline-secondary">Voltar</button>
-            </a>
+            <button type="button" class="btn btn-danger waves-effect w-md waves-light" onclick="window.history.go(-1);"><i class="fa fa-reply" aria-hidden="true"></i> Voltar</button>
         </div>
     </div>
 
     @if(isset($user))
     <form name="formEdit" id="formEdit" method="POST" action="{{url("users/$user->id")}}">
-        @method('PUT')  
+        @method('PUT')
         @else
         <form name="formCad" id="formCad" method="POST" action="{{url('users')}}">
             @endif
@@ -28,13 +26,13 @@
                         <div class="form-group col-md-4">
                             <label for="is_admin" class="col-form-label">Tipo Usuário:</label>
                             <select  class="form-control" name="is_admin" id="is_admin">
-                                <option value="0" @if($user->is_admin === 0) selected @endif>Comum</option>
-                                <option value="1" @if($user->is_admin === 1) selected @endif>Administrador</option>
+                                <option value="0" @if(@$user->is_admin === 0) selected @endif>Comum</option>
+                                <option value="1" @if(@$user->is_admin === 1) selected @endif>Administrador</option>
                             </select>
                         </div>
 
                         <div class="form-group col-md-8">
-                            <label for="name" class="col-md-4 col-form-label">Nome:</label>
+                            <label for="name" class="col-md-4 col-form-label">Nome <code class="highlighter-rouge">*</code>:</label>
 
                             <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{$user->name ?? old('name')}}" required autocomplete="name" autofocus>
 
@@ -46,7 +44,7 @@
                         </div>
 
                         <div class="form-group col-md-6">
-                            <label for="email" class="col-md-4 col-form-label">Email:</label>
+                            <label for="email" class="col-md-4 col-form-label">Email <code class="highlighter-rouge">*</code>:</label>
 
                             <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{$user->email ?? old('email')}}"  required autocomplete="email">
 
@@ -57,7 +55,7 @@
                             @enderror
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="password" class="col-md-4 col-form-label">Senha:</label>
+                            <label for="password" class="col-md-4 col-form-label">Senha <code class="highlighter-rouge">*</code>:</label>
 
                             <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
 
@@ -68,7 +66,7 @@
                             @enderror
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="password-confirm" class="col-md-4 col-form-label">Confirmar senha:</label>
+                            <label for="password-confirm" class="col-md-4 col-form-label">Confirmar senha <code class="highlighter-rouge">*</code>:</label>
 
                             <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                         </div>
@@ -80,6 +78,6 @@
                 </div>
             </div>
         </form>
-        
+
     </div>
     @endsection

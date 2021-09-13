@@ -6,13 +6,11 @@
 	<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 mt-4 border-bottom">
 		<h1 class="h4">Maquinário > @if(isset($machine))Editar @else Cadastrar @endif</h1>
 		<div class="btn-toolbar mb-2 mb-md-0">
-			<a href="{{url('machines')}}">
-				<button class="btn btn-sm btn-outline-secondary">Voltar</button>
-			</a>
+			<button type="button" class="btn btn-danger waves-effect w-md waves-light" onclick="window.history.go(-1);"><i class="fa fa-reply" aria-hidden="true"></i> Voltar</button>
 		</div>
 	</div>
 
-	
+
 	@if(isset($errors) && count($errors)> 0)
 	<div class="text-center mt-4 mb-4 p-2 alert-danger">
 		@foreach($errors->all() as $erro)
@@ -23,7 +21,7 @@
 
 	@if(isset($machine))
 	<form name="formEdit" id="formEdit" method="POST" action="{{url("machines/$machine->id")}}">
-		@method('PUT')	
+		@method('PUT')
 		@else
 		<form name="formCad" id="formCad" method="POST" action="{{url('machines')}}">
 			@endif
@@ -37,8 +35,8 @@
 						<div class="form-group col-md-4">
 							<label for="status" class="col-form-label">Status:</label>
 							<select  class="form-control" name="status" id="status">
-								<option value="1" @if($machine->status === 1) selected @endif>Ativo</option>
-								<option value="0" @if($machine->status === 0) selected @endif>Inativo</option>
+								<option value="1" @if(@$machine->status === 1) selected @endif>Ativo</option>
+								<option value="0" @if(@$machine->status === 0) selected @endif>Inativo</option>
 							</select>
 						</div>
 
@@ -92,6 +90,6 @@
 				</div>
 			</div>
 		</form>
-		
+
 	</div>
 	@endsection

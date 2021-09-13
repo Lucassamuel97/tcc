@@ -14,10 +14,29 @@ class MachinesController extends Controller
         $this->objMachine = new Machine();
     }
 
-    public function index(){
-        $machines = $this->objMachine->paginate(5);
+    public function index(Request $request){
+
+        $search =  $request->input('q');
+
+        if($search!=""){
+            $machines = Machine::where(function ($query) use ($search){
+                $query->where('description', 'like', '%'.$search.'%')
+                    ->orWhere('identification_number', 'like', '%'.$search.'%');
+            })
+            ->paginate(5);
+            $machines->appends(['q' => $search]);
+        }
+        else{
+            $machines = Machine::paginate(5);
+        }
+
         return view('machines/index',compact('machines'));
     }
+
+    // public function index(){
+    //     $machines = $this->objMachine->paginate(5);
+    //     return view('machines/index',compact('machines'));
+    // }
 
     public function create(){
       return view('machines/create');
@@ -46,7 +65,7 @@ class MachinesController extends Controller
     public function edit($id){
         $machine = $this->objMachine->find($id);
 
-        
+
         return view('machines/create',compact('machine'));
     }
 
@@ -79,7 +98,7 @@ class MachinesController extends Controller
         if ($del) {
             session()->flash('message', 'Máquinario deletado com sucesso');
         }
-        
+
         return($del)?"sim":"não";
     }
 }

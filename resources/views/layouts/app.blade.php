@@ -16,7 +16,7 @@
     <!-- Custom fonts for this template-->
     <link href="{{url('assets/vendor/font-awesome/5.14.0/css/all.min.css')}}" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-    
+
     <!-- Custom styles for this template-->
     <link href="{{url('assets/css/style.css')}}" rel="stylesheet">
 
@@ -36,7 +36,7 @@
             </a>
             <hr class="sidebar-divider my-0">
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('register')}}"> 
+                <a class="nav-link" href="{{ route('register')}}">
                     <i class="fas fa-fw fa-tachometer-alt"></i> Home
                 </a>
             </li>
@@ -126,6 +126,12 @@
     <!-- End of Topbar -->
 
     <div class="container-fluid">
+    	@if (session()->has('message'))
+            <div class="alert alert-success">
+                {{ session('message') }}
+            </div>
+        @endif
+
         @yield('content')
     </div>
 

@@ -9,10 +9,24 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Hash;
 
-class UserController extends Controller 
-{   
-    public function index(){
-        $users = User::orderBy('created_at', 'asc')->paginate(5);
+class UserController extends Controller
+{
+    public function index(Request $request){
+
+        $search =  $request->input('q');
+
+        if($search!=""){
+            $users = User::where(function ($query) use ($search){
+                $query->where('name', 'like', '%'.$search.'%')
+                    ->orWhere('email', 'like', '%'.$search.'%');
+            })
+            ->paginate(5);
+            $users->appends(['q' => $search]);
+        }
+        else{
+            $users = User::paginate(5);
+        }
+
         return view('users/index',compact('users'));
     }
 
@@ -40,9 +54,10 @@ class UserController extends Controller
         $user->password = Hash::make($request->password);
         $user->is_admin = $request->is_admin;
 
-        $user->save();
-
-        return redirect('/users');
+        if($user->save()){
+            session()->flash('message', 'Usuário Cadastrado com sucesso');
+            return redirect('/users');
+        }
     }
 
     public function edit($id){
@@ -62,17 +77,18 @@ class UserController extends Controller
                 ->withInput()
                 ->withErrors($validator);
         }
-        
+
         $user = User::find($id);
-        
+
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->is_admin = $request->is_admin;
-        
-        $user->save();
-        
-        return redirect('/users');
+
+        if($user->save()){
+            session()->flash('message', 'Usuário Atualizado com sucesso');
+            return redirect('/users');
+        }
     }
 
     public function destroy($id)
@@ -82,9 +98,7 @@ class UserController extends Controller
         if ($del) {
             session()->flash('message', 'Usuário deletado com sucesso');
         }
-        
+
         return($del)?"sim":"não";
     }
-
-    
 }

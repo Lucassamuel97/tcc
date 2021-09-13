@@ -7,7 +7,7 @@
 		<h1 class="h4">Maquinários</h1>
 		<div class="btn-toolbar mb-2 mb-md-0">
 			<a href="{{url('machines/create')}}">
-				<button class="btn btn-sm btn-outline-secondary">Novo Maquinário</button>
+				<button class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i> Novo Maquinário</button>
 			</a>
 		</div>
 	</div>
@@ -19,6 +19,20 @@
 		@endforeach
 	</div>
 	@endif
+
+
+	<form action="">
+		<div class="row mb-2">
+			<div class="col-md-7 offset-md-3">
+				<div class="input-group">
+					<input type="text" name="q" id="search" placeholder="Pesquisar maquinários!" class="form-control">
+					<span class="input-group-btn">
+						<button type="submit" class="btn btn-outline-primary"><i class="fa fa-search m-r-5"></i> Pesquisar</button>
+					</span>
+				</div>
+			</div>
+		</div>
+	</form>
 
 	@csrf
 	<table class="table table-bordered table-hover table-sm" width="100%">
@@ -36,12 +50,15 @@
 				<td>{{$machine->description}}</td>
 				<td>{{$machine->identification_number}}</td>
 				<td>@if($machine->status == "1")Ativo @else Inativo @endif</td>
-				<td>
-					<a href="{{url("machines/$machine->id")}}"><button class="btn btn-dark">Visualizar</button></a>
-					<a href="{{url("machines/$machine->id/edit")}}"><button class="btn btn-primary">Editar</button></a>
-
-					<a class="js-del" href="{{url("machines/$machine->id")}}">
-						<button class="btn btn-danger">Deletar</button>
+				<td class="text-center">
+					<a class="btn btn-outline-secondary" href="{{url("machines/$machine->id")}}" title="Visualizar"> 
+						<i class="fa fa-eye" aria-hidden="true"></i>
+					</a>
+					<a class="btn btn-outline-primary" href="{{url("machines/$machine->id/edit")}}" title="Editar"> 
+						<i class="fas fa-edit" aria-hidden="true"></i>
+					</a>
+					<a class="js-del btn btn-outline-danger" title="Deletar" href="{{url("machines/$machine->id")}}">
+						<i class="fas fa-trash-alt"></i>
 					</a>
 				</td>
 			</tr>
