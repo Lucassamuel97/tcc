@@ -1,0 +1,29 @@
+language: php
+
+dist: bionic
+
+
+php:
+   - 7.3
+
+
+services:
+    - mysql
+
+before_script:
+  - cp .env.example .env
+
+  - mysql -e "create database laravel"
+
+  - composer self-update
+
+  - composer install --no-interaction --prefer-source
+
+  - php artisan key:generate
+
+  - php artisan migrate
+
+
+script:
+
+  - vendor/bin/phpunit
