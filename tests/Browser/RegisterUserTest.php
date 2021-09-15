@@ -27,7 +27,7 @@ class RegisterUserTest extends DuskTestCase
             $browser->visit('/login')
                     ->type('email', 'lukassamuka88@gmail.com')
                     ->type('password', '12345678')
-                    ->press('Login')
+                    ->press('Entrar')
                     ->assertPathis('/')
                     ->assertSee('Você está logado!');
         });
