@@ -18,21 +18,9 @@ before_script:
   - composer install --no-progress --no-suggest --no-interaction --optimize-autoloader
 
   - php artisan key:generate
-
-  - npm install
   
-  - npm rebuild node-sass
-  
-  - npm run production
-  
-  - php artisan migrate --seed
-  
-  - ./vendor/laravel/dusk/bin/chromedriver-linux &
-
-  - php artisan serve > /dev/null 2>&1 &
+  - php artisan migrate 
   
 script:
 
   - vendor/bin/phpunit
-
-  - php artisan dusk
