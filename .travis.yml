@@ -27,7 +27,7 @@ before_script:
   
   - php artisan migrate --seed
 
-  - php artisan serve
+  - php artisan serve > /dev/null 2>&1 &
 
 script:
 
