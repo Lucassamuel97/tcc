@@ -26,11 +26,11 @@ before_script:
   - npm run production
   
   - php artisan migrate --seed
+  
+  - ./vendor/laravel/dusk/bin/chromedriver-linux &
 
   - php artisan serve > /dev/null 2>&1 &
-
-  - php artisan dusk:chrome-driver
-
+  
 script:
 
   - vendor/bin/phpunit
