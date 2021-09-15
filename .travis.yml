@@ -33,4 +33,4 @@ script:
 
   - vendor/bin/phpunit
 
-  - php artisan dusk
+  - php artisan dusk:chrome-driver
