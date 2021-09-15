@@ -93,7 +93,7 @@ class UserController extends Controller
 
     public function destroy($id)
     {
-        $del = User::find($id);
+        $del = User::destroy($id);
 
         if ($del) {
             session()->flash('message', 'Usuário deletado com sucesso');

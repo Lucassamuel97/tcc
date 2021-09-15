@@ -45,7 +45,7 @@
 					<a class="btn btn-outline-primary" href="{{url("users/$user->id/edit")}}" title="Editar"> 
 						<i class="fas fa-edit" aria-hidden="true"></i>
 					</a>
-					<a class="js-del btn btn-outline-danger" href="{{url("users/$user->id")}}">
+					<a class="js-del btn btn-outline-danger" title="Deletar" href='{{url("users/$user->id")}}'>
 						<i class="fas fa-trash-alt"></i>
 					</a>
 				</td>
