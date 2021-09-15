@@ -29,8 +29,10 @@ before_script:
 
   - php artisan serve > /dev/null 2>&1 &
 
+  - php artisan dusk:chrome-driver
+
 script:
 
   - vendor/bin/phpunit
 
-  - php artisan dusk:chrome-driver
+  - php artisan dusk
