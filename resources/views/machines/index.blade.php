@@ -25,7 +25,7 @@
 		<div class="row mb-2">
 			<div class="col-md-7 offset-md-3">
 				<div class="input-group">
-					<input type="text" name="q" id="search" placeholder="Pesquisar maquinários!" class="form-control">
+					<input type="text" name="q" id="search" placeholder="Pesquisar maquinários!" class="form-control" value="{{$search}}">
 					<span class="input-group-btn">
 						<button type="submit" class="btn btn-outline-primary"><i class="fa fa-search m-r-5"></i> Pesquisar</button>
 					</span>
