@@ -8,7 +8,7 @@
         let token=doc.getElementsByName("_token")[0].value;
         if(confirm("Deseja mesmo apagar?")){
            let ajax = new XMLHttpRequest();
-           alert("ok");
+        //    alert("ok");
            console.log(event.target.parentNode.href);
 
            ajax.open("DELETE",event.target.parentNode.href);

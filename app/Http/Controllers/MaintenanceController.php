@@ -35,7 +35,6 @@ class MaintenanceController extends Controller
         return view('maintenance/index',compact('machine','maintenances','search'));
     }
 
-
     public function create($machine){
         $machine = $this->objMachine->find($machine);
 
@@ -57,7 +56,7 @@ class MaintenanceController extends Controller
 
         if($cad){
             session()->flash('message', 'Manutenção Cadastrada com sucesso.');
-            return redirect('machines');
+            return redirect('maintenance/'.$request->machine_id);
         }
     }
 
@@ -85,7 +84,13 @@ class MaintenanceController extends Controller
     }
 
     public function destroy($id){
-        //
+        $del = $this->objMaintenance->destroy($id);
+
+        if($del){
+            session()->flash('message', 'Manutenção deletada com sucesso');
+        }
+
+        return($del)?"sim":"não";
     }
 
     public function selectMachine(Request $request){
@@ -101,7 +106,7 @@ class MaintenanceController extends Controller
         }else{
             $machines = Machine::paginate(5);
         }
-        
+
         return view('machines/selectMachine',compact('machines', 'search'));
     }
 

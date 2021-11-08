@@ -48,15 +48,20 @@
 				<th scope="col">Descrição</th>
 				<th scope="col">Hodômetro última Manutenção</th>
 				<th scope="col">Data da última manutenção</th>
-				<th scope="col" width="20%">Ação</th>
+				<th scope="col">Usuário resp. Cadastro</th>
+				<th scope="col" width="15%">Ação</th>
 			</tr>
 		</thead>
 		<tbody>
 			@foreach($maintenances as $maintenance)
+			@php
+                $user = $maintenance->find($maintenance->id)->relUser;
+            @endphp
 			<tr>
 				<td>{{$maintenance->description}}</td>
 				<td>{{$maintenance->last_hodometro}}</td>
-				<td>{{date('d/m/Y', strtotime($maintenance->last_months))}}</td>				
+				<td>{{date('d/m/Y', strtotime($maintenance->last_months))}}</td>
+				<td>{{$user->name}}</td>				
 				<td class="text-center">
 					<a class="btn btn-outline-primary" href="{{url("maintenance/$maintenance->id/edit")}}" title="Editar"> 
 						<i class="fas fa-edit" aria-hidden="true"></i>
