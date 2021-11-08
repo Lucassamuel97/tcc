@@ -30,7 +30,7 @@ class MachinesController extends Controller
             $machines = Machine::paginate(5);
         }
 
-        return view('machines/index',compact('machines'));
+        return view('machines/index',compact('machines', 'search'));
     }
 
     // public function index(){

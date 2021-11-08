@@ -15,13 +15,12 @@ before_script:
 
   - composer self-update
 
-  - composer install --no-interaction --prefer-source
+  - composer install --no-progress --no-suggest --no-interaction --optimize-autoloader
 
   - php artisan key:generate
-
-  - php artisan migrate
-
-
+  
+  - php artisan migrate 
+  
 script:
 
   - vendor/bin/phpunit

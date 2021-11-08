@@ -72,7 +72,7 @@ class UserTest extends TestCase
     }
 
     /** @test */
-    public function a_user_can_read_single_user()
+    public function an_administrator_can_read_a_user()
     {
         $this->withoutExceptionHandling();
         
@@ -88,7 +88,7 @@ class UserTest extends TestCase
             ->assertSee($user->email);
     }
 
-     /** @test */
+    /** @test */
     public function user_registration_validation(){
 
         $this->withoutExceptionHandling();

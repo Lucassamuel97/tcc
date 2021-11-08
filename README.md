@@ -1,1 +1,3 @@
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
+<a href="https://app.travis-ci.com/github/Lucassamuel97/tcc">
+    <img src="https://app.travis-ci.com/Lucassamuel97/tcc.svg?branch=main" alt="build:started">
+</a>

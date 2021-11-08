@@ -1,8 +1,6 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
-
-
 <head>
 
     <meta charset="utf-8">
@@ -50,7 +48,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{url('machines')}}"><i class="fas fa-tractor"></i> Maquinários</a>
             </li>
-            <!-- Divider -->
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{url('selectMachine')}}"><i class="fa fa-cogs" aria-hidden="true"></i> Manutenções</a>
+            </li>
+           
             <hr class="sidebar-divider d-none d-md-block">
 
             <!-- Sidebar Toggler (Sidebar) -->

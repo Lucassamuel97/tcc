@@ -4,11 +4,9 @@
 
 <div class="col-12 m-auto card-white">
 	<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 mt-4 border-bottom">
-		<h1 class="h4">Maquinários</h1>
+		<h1 class="h4">Manutenções > Selecionar maquinário</h1>
 		<div class="btn-toolbar mb-2 mb-md-0">
-			<a href="{{url('machines/create')}}">
-				<button class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i> Novo Maquinário</button>
-			</a>
+
 		</div>
 	</div>
 
@@ -38,10 +36,9 @@
 	<table class="table table-bordered table-hover table-sm" width="100%">
 		<thead>
 			<tr>
-				<th scope="col" width="30%">Descrição</th>
-				<th scope="col" width="15%">Nº Identificação</th>
-				<th scope="col" width="10%">Status</th>
-				<th scope="col" width="20%">Ação</th>
+				<th scope="col">Descrição</th>
+				<th scope="col">Nº Identificação</th>
+				<th scope="col">Ação</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -49,16 +46,13 @@
 			<tr>
 				<td>{{$machine->description}}</td>
 				<td>{{$machine->identification_number}}</td>
-				<td>@if($machine->status == "1")Ativo @else Inativo @endif</td>
 				<td class="text-center">
-					<a class="btn btn-outline-secondary" href="{{url("machines/$machine->id")}}" title="Visualizar"> 
-						<i class="fa fa-eye" aria-hidden="true"></i>
+
+                    <a class="btn btn-outline-success" href="{{url("maintenance/$machine->id/create")}}" title="Cadastrar Manutenção"> 
+                        <i class="fas fa-plus"></i> CADASTRAR MANUTENÇÃO
 					</a>
-					<a class="btn btn-outline-primary" href="{{url("machines/$machine->id/edit")}}" title="Editar"> 
-						<i class="fas fa-edit" aria-hidden="true"></i>
-					</a>
-					<a class="js-del btn btn-outline-danger" title="Deletar" href="{{url("machines/$machine->id")}}">
-						<i class="fas fa-trash-alt"></i>
+                    <a class="btn btn-outline-info" href="{{url("machines/$machine->id/edit")}}" title="Checagem de Manutenção"> 
+                        <i class="far fa-check-square"></i> CHECAGEM DE MANUTENÇÕES
 					</a>
 				</td>
 			</tr>
