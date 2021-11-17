@@ -188,6 +188,7 @@ aria-hidden="true">
 <script src="{{url('assets/vendor/jquery-easing/jquery.easing.min.js')}}"> </script>
 <script src="{{url('assets/js/sb-admin-2.min.js')}}"> </script>
 <script src="{{url('assets/js/javascript.js')}}"></script>
+<script src="{{url('assets/js/app.js')}}"></script>
 
 </body>
 </html>
