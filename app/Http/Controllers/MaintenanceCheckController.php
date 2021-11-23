@@ -6,16 +6,19 @@ use Illuminate\Http\Request;
 use App\Models\Maintenance;
 use App\Models\Machine;
 use App\Models\MaintenanceCheck;
+use App\Models\MaintenancePostpone;
+use Carbon\Carbon;
 use DB;
 
 class MaintenanceCheckController extends Controller
 {
-    private $objMaintenance, $objMachine;
+    private $objMaintenance, $objMachine, $objMaintenanceCheck, $objMaintenancePostpone;
 
     public function __construct(){
         $this->objMaintenance = new Maintenance();
         $this->objMachine = new Machine();
         $this->objMaintenanceCheck = new MaintenanceCheck();
+        $this->objMaintenancePostpone = new MaintenancePostpone();
     }
     
     public function index(Request $request, $machine){  
@@ -26,10 +29,12 @@ class MaintenanceCheckController extends Controller
         
         if($machine){
             $query = DB::table('maintenances')
-            ->select(DB::raw('maintenances.id, maintenances.description, date_add( last_months, INTERVAL range_months MONTH ) AS limit_date, 
-            TIMESTAMPDIFF( DAY, CURRENT_DATE, ( date_add( last_months, INTERVAL range_months MONTH ) ) ) AS days, 
-            last_hodometro + range_hodometro AS limit_hodometro,
-            CAST((last_hodometro + range_hodometro )AS CHAR) - machines.hodometro AS hodometro_balance '))
+            ->select(DB::raw('maintenances.id,
+            maintenances.description,
+            maintenances.limit_date,
+            TIMESTAMPDIFF( DAY, CURRENT_DATE, limit_date) AS days,
+            maintenances.limit_hodometro,
+            CAST(limit_hodometro as char) - machines.hodometro AS hodometro_balance'))
             ->join('machines', 'machines.id', '=', 'machine_id')
             ->where('machine_id', '=', $machine->id);
 
@@ -55,6 +60,7 @@ class MaintenanceCheckController extends Controller
         }   
         return redirect('selectMachine');
     }
+
     public function accomplish(Request $request,  $machine){
         $id_user = Auth::id(); 
         $machine = $this->objMachine->find($machine);
@@ -75,23 +81,37 @@ class MaintenanceCheckController extends Controller
     }
 
     public function updateLastMaintenance($id, $hodometro){
-        $update = $this->objMaintenance->where(['id'=>$id])->update([
-            'last_hodometro'  => $hodometro,
-            'last_months'     => date('Y-m-d')
-        ]);
-    }
-
-    public function edit($id){
+        $maintenance = $this->objMaintenance->find($id);
         
+        $maintenance->last_months = date('Y-m-d');
+        $maintenance->last_hodometro = $hodometro;
+        $maintenance->limit_hodometro = $hodometro + $maintenance->range_hodometro;
+        $dt = Carbon::parse($maintenance->last_months)->addMonths($maintenance->range_months);
+        $maintenance->limit_date = $dt;
+        $maintenance->update();
     }
 
-    public function update(Request $request, $id)
-    {
-        //
+
+    public function postpone(Request $request,  $machine){
+        $id_user = Auth::id(); 
+        $maintenance = $this->objMaintenance->find($request->id);
+
+        $cad = $this->objMaintenancePostpone->create([
+            'maintenance_id'     => $request->id,
+            'user_id'            => $id_user,
+            'postpone_months'    => $request->postpone_months,
+            'postpone_hodometro' => $request->postpone_hodometro,
+            'note'               => $request->note
+        ]);
+
+        if($cad){
+            $maintenance->limit_hodometro += $request->postpone_hodometro;
+            $maintenance->limit_date = Carbon::parse($maintenance->limit_date)->addMonths($request->postpone_months);
+            $maintenance->update();
+
+            session()->flash('message', 'Manutenção realizada com sucesso');
+            return redirect($machine.'/maintenanceCheck');
+        }
     }
 
-    public function destroy($id)
-    {
-        //
-    }
 }

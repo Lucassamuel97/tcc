@@ -20,6 +20,8 @@ class CreateMaintenancesTable extends Migration
             $table->integer('range_months');
             $table->unsignedBigInteger('last_hodometro');
             $table->date('last_months');
+            $table->date('limit_date');
+            $table->unsignedBigInteger('limit_hodometro');
             $table->foreignId('machine_id')->constrained()->onDelete('cascade');
             $table->foreignId('user_id')->constrained();	
             $table->timestamps();

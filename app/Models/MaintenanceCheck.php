@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 class MaintenanceCheck extends Model{
-    protected $fillable = ['maintenance_id','user_id','price','note','hodometro'];
+	protected $fillable = ['maintenance_id','user_id','price','note','hodometro'];
 	protected $table = 'maintenance_checks'; 
 
 	public function relUsers(){

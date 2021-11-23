@@ -16,6 +16,7 @@ Route::resource('/maintenance', 'MaintenanceController')->middleware('auth');
 
 
 Route::post('{machine}/maintenance/accomplish', 'MaintenanceCheckController@accomplish')->middleware('auth');
+Route::post('{machine}/maintenance/postpone', 'MaintenanceCheckController@postpone')->middleware('auth');
 
 Route::resource('/{machine}/maintenanceCheck', 'MaintenanceCheckController')->middleware('auth');
 

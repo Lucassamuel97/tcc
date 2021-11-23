@@ -20,14 +20,11 @@
 	</div>
 	@endif
 
-    <div class="mt-2 mb-2 p-1 alert-info">
-		Maquinário selecionado: <b>{{ $machine->description }}</b>
-    	<p class="text-muted font-13">
-			N° Identificação: <b>{{ $machine->identification_number }} </b>
-    		Ano: <b>{{$machine->year_manufacture}} </b><br>
-			Hodômetro Atual: <b>{{$machine->hodometro}}</b>
-    		Data Atual: <b>{{ date('d/m/Y') }} </b>
-		</p>
+    <div class="mt-2 mb-2 p-2 alert-info text-center" >
+		<i class="fas fa-tractor"></i> Descrição: <b>{{ $machine->description }}</b> - 
+		<i class="fas fa-id-card-alt"></i>: N° Identificação: <b>{{ $machine->identification_number }} </b> -  
+		<i class="fas fa-tachometer-alt"></i>: Hodômetro: <b>{{$machine->hodometro}}</b> - 
+    	<i class="far fa-calendar-alt"></i>: Data Atual: <b>{{ date('d/m/Y') }} </b>
     </div>
 
 	<form action="" id="filters">
@@ -74,15 +71,15 @@
 					N°: <b>{{$maintenance->limit_hodometro}} h</b>
 					Horas restantes: <b>{{$maintenance->hodometro_balance}} h</b>
 				</td>
-				<td class="{{ $maintenance->days <  50 ? $maintenance->days <= 0 ? 'fd-danger':'fd-warning' : ''  }}">
+				<td class="{{ $maintenance->days <=  30 ? $maintenance->days <= 0 ? 'fd-danger':'fd-warning' : ''  }}">
 					Data prevista: <b>{{date('d/m/Y', strtotime($maintenance->limit_date))}}</b>
 					Dias restantes: <b>{{$maintenance->days}} d</b>
 				</td>		
 				<td class="text-center">
-					<button class="demo-delete-row btn btn-success btn-xs btn-icon" onclick="accomplish({{$maintenance->id}},'{{$maintenance->description}}')" data-toggle="modal" data-target="#con-close-modal">
+					<button class="demo-delete-row btn btn-success btn-xs btn-icon" onclick="accomplish({{$maintenance->id}},'{{$maintenance->description}}')" data-toggle="modal" data-target="#con-accomplish-modal">
 						<i class="far fa-thumbs-up"></i> Realizar
 					</button>
-					<button class="demo-delete-row btn btn-danger btn-xs btn-icon" data-toggle="modal" data-target="#con-close-modal2">
+					<button class="demo-delete-row btn btn-danger btn-xs btn-icon" onclick="postpone({{$maintenance->id}},'{{$maintenance->description}}')" data-toggle="modal" data-target="#con-postpone-modal">
 						<i class="far fa-window-close"></i> Adiar
 					</button>
 				</td>
@@ -95,6 +92,7 @@
 </div>
 
 @include('maintenanceCheck.modalAccomplish')
+@include('maintenanceCheck.modalPostpones')
 
 @endsection
 

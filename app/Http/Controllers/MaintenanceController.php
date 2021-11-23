@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Maintenance;
 use App\Models\Machine;
 use App\Http\Requests\MaintenanceRequest;
+use Carbon\Carbon;
+
 
 class MaintenanceController extends Controller
 {
@@ -43,6 +45,7 @@ class MaintenanceController extends Controller
 
     public function store(MaintenanceRequest $request){
         $id_user = Auth::id(); 
+        $dt = Carbon::parse($request->last_months)->addMonths($request->range_months);
 
         $cad = $this->objMaintenance->create([
             'description'     => $request->description,
@@ -50,10 +53,12 @@ class MaintenanceController extends Controller
             'range_months'    => $request->range_months,
             'last_hodometro'  => $request->last_hodometro,
             'last_months'     => $request->last_months,
+            'limit_hodometro' => ($request->last_hodometro + $request->range_hodometro),
+            'limit_date'      => $dt,
             'machine_id'      => $request->machine_id,
             'user_id'         => $id_user
         ]);
-
+        
         if($cad){
             session()->flash('message', 'Manutenção Cadastrada com sucesso.');
             return redirect('maintenance/'.$request->machine_id);
@@ -68,13 +73,17 @@ class MaintenanceController extends Controller
     }
 
     public function update(MaintenanceRequest $request, $id){
+
+        $dt = Carbon::parse($request->last_months)->addMonths($request->range_months);
         
         $update = $this->objMaintenance->where(['id'=>$id])->update([
             'description'     => $request->description,
             'range_hodometro' => $request->range_hodometro,
             'range_months'    => $request->range_months,
             'last_hodometro'  => $request->last_hodometro,
-            'last_months'     => $request->last_months
+            'last_months'     => $request->last_months,
+            'limit_hodometro' => ($request->last_hodometro + $request->range_hodometro),
+            'limit_date'      => $dt
         ]);
         
         if($update){

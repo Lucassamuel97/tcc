@@ -10,7 +10,7 @@ $factory->define(Machine::class, function (Faker $faker) {
     return [
         'description' => "trator teste ".$faker->randomNumber(2),
         'status' => "1",
-        'hodometro' => $faker->randomNumber(5),
+        'hodometro' => $faker->randomNumber(3),
         'identification_number' => Str::random(10),
     ];
 });

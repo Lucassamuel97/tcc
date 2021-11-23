@@ -1,4 +1,4 @@
-<div id="con-close-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+<div id="con-accomplish-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
     <div class="modal-dialog">
         <div class="modal-content">
             <form name="formAccomplish" id="formAccomplish" method="POST" action="{{url("$machine->id/maintenance/accomplish/")}}">
@@ -11,7 +11,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="price" class="control-label">Preço</label>
-                                <input type="number" name="price" id="price" class="form-control"  placeholder="0.00">
+                                <input type="number" name="price" id="price" class="form-control" min="0" value="0" required>
                                 <input type="hidden" name="id" id="accomplish_idmachine">
                             </div>
                         </div>
