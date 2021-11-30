@@ -20,12 +20,7 @@
 	</div>
 	@endif
 
-    <div class="mt-2 mb-2 p-2 alert-info text-center" >
-		<i class="fas fa-tractor"></i> Descrição: <b>{{ $machine->description }}</b> - 
-		<i class="fas fa-id-card-alt"></i>: N° Identificação: <b>{{ $machine->identification_number }} </b> -  
-		<i class="fas fa-tachometer-alt"></i>: Hodômetro: <b>{{$machine->hodometro}}</b> - 
-    	<i class="far fa-calendar-alt"></i>: Data Atual: <b>{{ date('d/m/Y') }} </b>
-    </div>
+    @include('machines.machineDetails')
 
 	<form action="" id="filters">
 		<div class="row mb-2">
@@ -65,9 +60,9 @@
 		<tbody>
 			@foreach($maintenances as $maintenance)
 			<tr>
-				<td>{{$maintenance->description}}</td>
+				<td><a target="_blanck" href="{{url("maintenance/$maintenance->id/historic")}}" title="Historico">{{$maintenance->description}}</a></td>
 	
-				<td class="{{ $maintenance->hodometro_balance <  50 ? $maintenance->hodometro_balance < 0 ? 'fd-danger':'fd-warning' : ''  }}">
+				<td class="{{ $maintenance->hodometro_balance <  50 ? $maintenance->hodometro_balance <= 0 ? 'fd-danger':'fd-warning' : ''  }}">
 					N°: <b>{{$maintenance->limit_hodometro}} h</b>
 					Horas restantes: <b>{{$maintenance->hodometro_balance}} h</b>
 				</td>

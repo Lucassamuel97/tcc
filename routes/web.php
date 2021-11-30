@@ -13,6 +13,7 @@ Route::get('/maintenance/{machine}/create', 'MaintenanceController@create')->mid
 Route::get('/maintenance/{id}/edit', 'MaintenanceController@edit')->middleware('auth');
 Route::get('/maintenance/{machine}/', 'MaintenanceController@index')->middleware('auth');
 Route::resource('/maintenance', 'MaintenanceController')->middleware('auth');
+Route::get('maintenance/{maintenance}/historic', 'MaintenanceController@historic')->middleware('auth');
 
 
 Route::post('{machine}/maintenance/accomplish', 'MaintenanceCheckController@accomplish')->middleware('auth');

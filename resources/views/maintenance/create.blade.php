@@ -24,13 +24,7 @@
 	</div>
 	@endif
 
-    <div class="mt-2 mb-2 p-1 alert-info">
-    	<p class="text-muted font-13">
-			<h6>Maquinário selecionado: <b>{{ $machine->description }}</b></h6>
-			N° Identificação: <b>{{ $machine->identification_number }} </b>
-    		Ano: <b>{{$machine->year_manufacture}} </b>
-		</p>
-    </div>
+    @include('machines.machineDetails')
 
 	@if(isset($maintenance))
 	<form name="formEdit" id="formEdit" method="POST" action="{{url("maintenance/$maintenance->id")}}">

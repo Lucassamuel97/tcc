@@ -113,5 +113,5 @@ class MaintenanceCheckController extends Controller
             return redirect($machine.'/maintenanceCheck');
         }
     }
-
+    
 }

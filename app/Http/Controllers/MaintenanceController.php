@@ -8,7 +8,7 @@ use App\Models\Maintenance;
 use App\Models\Machine;
 use App\Http\Requests\MaintenanceRequest;
 use Carbon\Carbon;
-
+use DB;
 
 class MaintenanceController extends Controller
 {
@@ -118,5 +118,44 @@ class MaintenanceController extends Controller
 
         return view('machines/selectMachine',compact('machines', 'search'));
     }
+ 
+    public function historic(Request $request,  $maintenance){
+        
+        $maintenance = DB::table('maintenances')
+        ->select(DB::raw('maintenances.*,
+        TIMESTAMPDIFF( DAY, CURRENT_DATE, limit_date) AS days,
+        CAST(limit_hodometro as char) - machines.hodometro AS hodometro_balance'))
+        ->join('machines', 'machines.id', '=', 'machine_id')
+        ->where('maintenances.id', '=', $maintenance)->first();
 
+        $machine = $this->objMachine->find($maintenance->machine_id);
+        
+        //Manutenções realizadas
+        $queryCheks = DB::table('maintenance_checks')
+            ->select(DB::raw('"Realização" as operation,
+            maintenance_checks.created_at as data,
+            hodometro,
+            price as price,
+            "" as mes, 
+            note,
+            name as user'))
+            ->join('users', 'users.id', '=', 'user_id')
+            ->where('maintenance_id', '=', $maintenance->id);
+        
+        //Manutenções adiadas
+        $queryPostpones = DB::table('maintenance_postpones')
+            ->select(DB::raw('"Adiamento" as operation,
+            maintenance_postpones.created_at,
+            postpone_hodometro,
+            "" as price,
+            postpone_months,
+            note,
+            name as user'))
+            ->join('users', 'users.id', '=', 'user_id')
+            ->where('maintenance_id', '=', $maintenance->id);
+
+        $maintenances = $queryCheks->union($queryPostpones)->orderBy('data', 'desc')->get();
+
+        return view('maintenance/show',compact('machine','maintenance','maintenances'));
+    } 
 }
