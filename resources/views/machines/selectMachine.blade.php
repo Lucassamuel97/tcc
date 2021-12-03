@@ -17,8 +17,7 @@
 		@endforeach
 	</div>
 	@endif
-
-
+	
 	<form action="">
 		<div class="row mb-2">
 			<div class="col-md-7 offset-md-3">

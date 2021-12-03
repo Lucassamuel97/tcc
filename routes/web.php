@@ -21,6 +21,8 @@ Route::post('{machine}/maintenance/postpone', 'MaintenanceCheckController@postpo
 
 Route::resource('/{machine}/maintenanceCheck', 'MaintenanceCheckController')->middleware('auth');
 
+Route::resource('/updateHodometro', 'UpdateHodometroController')->middleware('auth');
+
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', 'HomeController@index')->name('home');
 

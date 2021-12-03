@@ -52,6 +52,10 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{url('selectMachine')}}"><i class="fa fa-cogs" aria-hidden="true"></i> Manutenções</a>
             </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{url('updateHodometro')}}"><i class="far fa-clock"></i> Lançar Hodômetro</a>
+            </li>
            
             <hr class="sidebar-divider d-none d-md-block">
 
