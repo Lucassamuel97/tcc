@@ -37,7 +37,7 @@ class UpdateHodometroController extends Controller
         $id_user = Auth::id(); 
         
         $cad = $this->objUpdateHodometro->create([
-            'maintenance_id' => $request->id,
+            'machine_id'    => $request->id,
             'user_id'        => $id_user,
             'hodometro'      => $request->hodometro
         ]);
@@ -56,5 +56,11 @@ class UpdateHodometroController extends Controller
             session()->flash('maintenance', [$machine->id, $machine->description, $maintenances]);
             return redirect('updateHodometro/');
         }
+    }
+    public function show($id){
+        $machine = $this->objMachine->find($id);
+        $historic = $machine->relHodometroUpdates()->get();
+
+        return view('updateHodometro/show', compact('machine','historic'));
     }
 }

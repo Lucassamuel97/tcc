@@ -15,8 +15,8 @@ class CreateUpdateHodometrosTable extends Migration
     {
         Schema::create('update_hodometros', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('maintenance_id')->constrained()->onDelete('cascade');
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('machine_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained();	
             $table->unsignedBigInteger('hodometro');
             $table->timestamps();
         });

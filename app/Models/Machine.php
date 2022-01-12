@@ -12,4 +12,9 @@ class Machine extends Model
 	public function relMaintenances(){
 		return $this->hasMany('App\Models\Maintenance','machine_id');
 	}
+
+	public function relHodometroUpdates(){
+		return $this->hasMany('App\Models\UpdateHodometro','machine_id');
+	}
+
 }
