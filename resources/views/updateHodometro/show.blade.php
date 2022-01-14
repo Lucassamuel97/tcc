@@ -22,8 +22,8 @@
 		<tbody>
 			@foreach($historic as $row)
 			<tr>
-				<td>{{$row->created_at}}</td>
-				<td>{{$row->hodometro}}</td>
+				<td>{{date('d/m/Y H:i:s', strtotime($row->created_at))}}</td>
+				<td>{{$row->hodometro}}h</td>
 				<td>{{$row->relUser()->first()->name}}</td>
 			</tr>
 			@endforeach

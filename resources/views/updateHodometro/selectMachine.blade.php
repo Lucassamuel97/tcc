@@ -53,7 +53,7 @@
 		<tbody>
 			@foreach($machines as $machine)
 			<tr>
-				<td>{{$machine->description}}</td>
+				<td><a href="{{url("updateHodometro/$machine->id")}}" title="Historico">{{$machine->description}}</a></td>
 				<td>{{$machine->identification_number}}</td>
 				<td>{{$machine->hodometro}}h</td>
 				<td class="text-center">
