@@ -20,9 +20,7 @@
 
 </head>
 <body id="page-top">
-
     <div id="wrapper">
-
         <!-- MENU -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
@@ -35,26 +33,42 @@
             <hr class="sidebar-divider my-0">
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('register')}}">
-                    <i class="fas fa-fw fa-tachometer-alt"></i> Home
+                    <i class="fas fa-fw fa-tachometer-alt"></i> <span>Home</span>
                 </a>
             </li>
             @auth
             <?php if (Auth::user()->is_admin): ?>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{url('users')}}"><i class="fas fa-users"></i>Usuários</a>
+                    <a class="nav-link" href="{{url('users')}}"><i class="fas fa-users"></i>
+                        <span>Usuários</span>
+                    </a>
                 </li>
             <?php endif ?>
             @endauth
             <li class="nav-item">
-                <a class="nav-link" href="{{url('machines')}}"><i class="fas fa-tractor"></i> Maquinários</a>
+                <a class="nav-link" href="{{url('machines')}}"><i class="fas fa-tractor"></i> <span>Maquinários</span></a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="{{url('selectMachine')}}"><i class="fa fa-cogs" aria-hidden="true"></i> Manutenções</a>
+                <a class="nav-link" href="{{url('selectMachine')}}"><i class="fa fa-cogs" aria-hidden="true"></i> <span>Manutenções</span> </a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="{{url('updateHodometro')}}"><i class="far fa-clock"></i> Lançar Hodômetro</a>
+                <a class="nav-link" href="{{url('updateHodometro')}}"><i class="far fa-clock"></i> <span>Lançar Hodômetro</span></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-file-alt"></i>
+                     <span>Relatórios</span>
+                </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{url('report/maintenances')}}">Manutenções</a>
+                        <a class="collapse-item" href="cards.html">Gastos com manutenções</a>
+                    </div>
+                </div>
             </li>
            
             <hr class="sidebar-divider d-none d-md-block">

@@ -23,6 +23,9 @@ Route::resource('/{machine}/maintenanceCheck', 'MaintenanceCheckController')->mi
 
 Route::resource('/updateHodometro', 'UpdateHodometroController')->middleware('auth');
 
+Route::get('/report/maintenances', 'ReportController@filterMaintenance')->middleware('auth');
+Route::get('/maintenances/report', 'ReportController@maintenanceReport')->middleware('auth');
+
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', 'HomeController@index')->name('home');
 
