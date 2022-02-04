@@ -66,7 +66,7 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="{{url('report/maintenances')}}">Manutenções</a>
-                        <a class="collapse-item" href="cards.html">Gastos com manutenções</a>
+                        <a class="collapse-item" href="{{url('report/maintenances/expenses')}}">Gastos com manutenções</a>
                     </div>
                 </div>
             </li>

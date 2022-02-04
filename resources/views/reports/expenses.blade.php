@@ -4,7 +4,7 @@
 <div class="col-12 m-auto card-white">
 
 	<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 mt-4 border-bottom">
-		<h1 class="h4">Relatório de Manutenções por maquinário</h1>
+		<h1 class="h4">Relatório de Gastos com Manutenções</h1>
 		<div class="btn-toolbar mb-2 mb-md-0">
 			
 			<button type="button" class="btn btn-danger waves-effect w-md waves-light ml-2" onclick="window.history.go(-1);"><i class="fa fa-reply" aria-hidden="true"></i> Voltar</button>
@@ -19,12 +19,12 @@
 	</div>
 	@endif
 
-	<form name="formCad" id="formCad" method="GET" action="{{url('maintenances/report')}}" target="_blank">
+	<form name="formCad" id="formCad" method="GET" action="{{url('/report/maintenances/expenses/pdf')}}" target="_blank">
 		<div class="row">
 			<div class="col-md-12">
 				<div class="form-row">
 					<div class="form-group col-md-6">
-						<label for="user" class="col-form-label">Usuario Responsavel: </label>
+						<label for="user" class="col-form-label">Usuário Responsável: </label>
 						<select class="form-control" name="user" id="user">
 							<option value="">Todos</option>
 							@if(isset($users) && count($users)> 0)	
@@ -56,15 +56,6 @@
 					<div class="form-group col-md-6">
 						<label for="final_date" class="col-form-label">Data Final: </label>
 						<input type="date" class="form-control" id="final_date" name="final_date">
-					</div>
-
-					<div class="form-group col-md-4">
-						<label for="status" class="col-form-label">Status da manutenção:</label>
-						<select  class="form-control" name="status" id="status">
-							<option value="">Todos</option>
-							<option value="1">Realizadas</option>
-							<option value="2">Adiadas</option>
-						</select>
 					</div>
 
 				</div>

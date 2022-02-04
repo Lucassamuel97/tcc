@@ -11690,3 +11690,34 @@ body.sidebar-toggled footer.sticky-footer {
   border-radius: 2em;
 }
 
+/* Relatorios */
+.report_header{
+  text-align: center;
+  font-size: 11px;
+  color: black;
+}
+.report_header h1{
+  font-size: 15px;
+}
+.report_header h3{
+  font-size: 14px;
+} 
+.report_table{
+  margin-top: 10px;
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 12px;
+  color: black;
+}
+.report_table th, .report_table td{
+  border: 1px solid black;
+  padding: 3px;
+  line-height: 1.2;
+} 
+.report_table tr:nth-child(even){
+  background: #FFF!important;
+} 
+.report_table tr:nth-child(odd){
+  background: #EEE!important;
+}
+
