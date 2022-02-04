@@ -7,6 +7,9 @@ Auth::routes();
 Route::resource('/users', 'UserController')->middleware(['auth', 'auth.admin']);
 
 Route::resource('/machines', 'MachinesController')->middleware('auth');
+Route::get('/machines/{machine}/qrcode', 'MachinesController@qrcode')->middleware('auth');
+Route::get('/machines/{machine}/qrcode/print', 'MachinesController@qrcodePrint')->middleware('auth');
+
 
 Route::get('/selectMachine', 'MaintenanceController@selectMachine')->middleware('auth');
 Route::get('/maintenance/{machine}/create', 'MaintenanceController@create')->middleware('auth');

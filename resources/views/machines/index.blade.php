@@ -51,11 +51,14 @@
 				<td>{{$machine->identification_number}}</td>
 				<td>@if($machine->status == "1")Ativo @else Inativo @endif</td>
 				<td class="text-center">
+					<a class="btn btn-outline-primary" href="{{url("machines/$machine->id/edit")}}" title="Editar"> 
+						<i class="fas fa-edit" aria-hidden="true"></i>
+					</a>
 					<a class="btn btn-outline-secondary" href="{{url("machines/$machine->id")}}" title="Visualizar"> 
 						<i class="fa fa-eye" aria-hidden="true"></i>
 					</a>
-					<a class="btn btn-outline-primary" href="{{url("machines/$machine->id/edit")}}" title="Editar"> 
-						<i class="fas fa-edit" aria-hidden="true"></i>
+					<a class="btn btn-outline-primary" target="_blank" href="{{url("/machines/$machine->id/qrcode/print")}}" title="Imprimir QRCODE"> 
+						<i class="fas fa-qrcode"></i>
 					</a>
 					<a class="js-del btn btn-outline-danger" title="Deletar" href="{{url("machines/$machine->id")}}">
 						<i class="fas fa-trash-alt"></i>
