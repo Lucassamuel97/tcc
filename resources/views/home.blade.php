@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+                <div class="card-header">{{ __('Dashboard') }} - <small>dados referente ao mês {{$month}} de {{$year}}</small></div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -35,6 +35,7 @@
                         </div>
 
                         <div class="col-xl-4 col-md-6 mb-4">
+                        <a target="_blank" href='{{url("report/maintenances/expenses/pdf?initial_date=$year-$month-01&final_date=$year-$month-31")}}'>
                             <div class="card border-left-success shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
@@ -49,6 +50,7 @@
                                     </div>
                                 </div>
                             </div>
+                            </a>
                         </div>
 
                         <div class="col-xl-4 col-md-6 mb-4">

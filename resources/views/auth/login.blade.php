@@ -25,9 +25,8 @@
         <section>
             <div class="container p-5">
                 <div class="row">
-                    <div class="col-5 m-auto card-white">
+                    <div class="m-auto card-white">
                         <div class="wrapper-page">
-
                             <div class="account-pages">
                                 <div class="account-box">
                                     <div class="account-logo-box">

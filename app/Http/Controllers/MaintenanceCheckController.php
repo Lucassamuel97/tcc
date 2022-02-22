@@ -109,7 +109,7 @@ class MaintenanceCheckController extends Controller
             $maintenance->limit_date = Carbon::parse($maintenance->limit_date)->addMonths($request->postpone_months);
             $maintenance->update();
 
-            session()->flash('message', 'Manutenção realizada com sucesso');
+            session()->flash('message', 'Manutenção Adiada com sucesso');
             return redirect($machine.'/maintenanceCheck');
         }
     }

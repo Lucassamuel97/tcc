@@ -74,6 +74,6 @@ class HomeController extends Controller
 
         $noticeMaintenance = $query->orderBy('status', 'asc')->orderBy('quant', 'desc')->get();
   
-        return view('home',compact('total_maintenance', 'maintenance_expenses','maintenance_postpones', 'noticeMaintenance'));
+        return view('home',compact('total_maintenance', 'maintenance_expenses','maintenance_postpones', 'noticeMaintenance','year','month'));
     }
 }
