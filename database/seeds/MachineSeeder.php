@@ -11,6 +11,9 @@ class MachineSeeder extends Seeder
      * @return void
      */
     public function run(Machine $machine){
-        factory(Machine::class, 2)->create();
+        factory(Machine::class)->create([
+            'description' => 'Trator 5070E John Deere',  
+            'year_manufacture' => '2022'              
+            ]);
     }
 }

@@ -50,7 +50,7 @@ class HomeController extends Controller
         "1" as status'))
         ->join('machines', 'machines.id', '=', 'machine_id')
         ->whereRaw('TIMESTAMPDIFF(DAY, CURRENT_DATE(), limit_date) <= ?', ['0'])
-        ->orWhereRaw('limit_hodometro - machines.hodometro <= ?', ['0'])
+        ->orWhereRaw('CAST(limit_hodometro as char)  - machines.hodometro <= ?', ['0'])
         ->groupBy('machine_id','description','id_number');
 
         $data1 = Carbon::now();
@@ -65,8 +65,8 @@ class HomeController extends Controller
         ->join('machines', 'machines.id', '=', 'machine_id')
         ->whereBetween('limit_date', [$data1, $data2])
         ->orWhere(function($query) {
-            $query->whereRaw('limit_hodometro - machines.hodometro < ?', ['50'])
-                  ->whereRaw('limit_hodometro - machines.hodometro > ?', ['0']);
+            $query->whereRaw('CAST(limit_hodometro as char)  - machines.hodometro < ?', ['50'])
+                  ->whereRaw('CAST(limit_hodometro as char)  - machines.hodometro > ?', ['0']);
         })
         ->groupBy('machine_id','description','id_number');
 
