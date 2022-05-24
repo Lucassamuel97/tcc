@@ -48,11 +48,11 @@
 	</form>
 
 	@csrf
-	<table class="table table-bordered table-hover table-sm mb-2" width="100%">
+	<table class="table table-bordered table-hover table-sm mb-2" width="100%" >
 		<thead>
 			<tr>
 				<th scope="col">Descrição</th>
-				<th scope="col">N° Hodômetro previsto: </th>
+				<th scope="col">N° Hodômetro previsto para realização: </th>
 				<th scope="col">Data prevista para realizar: </th>
 				<th scope="col" width="15%">Ação</th>
 			</tr>
@@ -63,11 +63,12 @@
 				<td><a target="_blanck" href="{{url("maintenance/$maintenance->id/historic")}}" title="Historico">{{$maintenance->description}}</a></td>
 	
 				<td class="{{ $maintenance->hodometro_balance <  50 ? $maintenance->hodometro_balance <= 0 ? 'fd-danger':'fd-warning' : ''  }}">
-					N°: <b>{{$maintenance->limit_hodometro}} h</b>
-					Horas restantes: <b>{{$maintenance->hodometro_balance}} h</b>
+					Realizar em: <b>{{$maintenance->limit_hodometro}} h</b> <br> 
+					{{ $maintenance->hodometro_balance <= 0 ? 'Atrasada em:' : 'Horas restantes:'}}
+					 <b>{{abs($maintenance->hodometro_balance)}} h</b> </td>
 				</td>
 				<td class="{{ $maintenance->days <=  30 ? $maintenance->days <= 0 ? 'fd-danger':'fd-warning' : ''  }}">
-					Data prevista: <b>{{date('d/m/Y', strtotime($maintenance->limit_date))}}</b>
+					Data prevista: <b>{{date('d/m/Y', strtotime($maintenance->limit_date))}}</b><br>
 					Dias restantes: <b>{{$maintenance->days}} d</b>
 				</td>		
 				<td class="text-center">
