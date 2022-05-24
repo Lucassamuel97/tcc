@@ -9,7 +9,6 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSeeder::class);
         $this->call(MachineSeeder::class);
         $this->call(MaintenanceSeeder::class);
-        
-        //$this->call(BookSeeder::class);
+        // $this->call(MaintenanceCheckSeeder::class);
     }
 }

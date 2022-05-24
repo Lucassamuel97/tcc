@@ -7,6 +7,7 @@ use App\Models\Maintenance;
 use App\Models\Machine;
 use App\Models\MaintenanceCheck;
 use App\Models\MaintenancePostpone;
+use App\Http\Requests\MaintenanceCheckRequest;
 use Carbon\Carbon;
 use DB;
 
@@ -61,20 +62,21 @@ class MaintenanceCheckController extends Controller
         return redirect('selectMachine');
     }
 
-    public function accomplish(Request $request,  $machine){
+    public function accomplish(MaintenanceCheckRequest $request,  $machine){
+
         $id_user = Auth::id(); 
         $machine = $this->objMachine->find($machine);
 
         $cad = $this->objMaintenanceCheck->create([
-            'maintenance_id' => $request->id,
+            'maintenance_id' => $request->maintenance_id,
             'user_id'        => $id_user,
             'price'          => $request->price,
-            'note'           => $request->obs,
+            'note'           => $request->note,
             'hodometro'      => $machine->hodometro
         ]);
-
+        
         if($cad){
-            $this->updateLastMaintenance($request->id,$machine->hodometro);
+            $this->updateLastMaintenance($cad->maintenance_id,$machine->hodometro);
             session()->flash('message', 'Manutenção realizada com sucesso');
             return redirect($machine->id.'/maintenanceCheck');
         }
@@ -92,12 +94,12 @@ class MaintenanceCheckController extends Controller
     }
 
 
-    public function postpone(Request $request,  $machine){
+    public function postpone(MaintenanceCheckRequest $request,  $machine){
         $id_user = Auth::id(); 
-        $maintenance = $this->objMaintenance->find($request->id);
+        $maintenance = $this->objMaintenance->find($request->maintenance_id);
 
         $cad = $this->objMaintenancePostpone->create([
-            'maintenance_id'     => $request->id,
+            'maintenance_id'     => $request->maintenance_id,
             'user_id'            => $id_user,
             'postpone_months'    => $request->postpone_months,
             'postpone_hodometro' => $request->postpone_hodometro,

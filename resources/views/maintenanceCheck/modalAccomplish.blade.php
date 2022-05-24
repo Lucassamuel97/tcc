@@ -12,13 +12,13 @@
                             <div class="form-group">
                                 <label for="price" class="control-label">Preço</label>
                                 <input type="number" name="price" id="price" class="form-control" min="0" value="0" required>
-                                <input type="hidden" name="id" id="accomplish_idmachine">
+                                <input type="hidden" name="maintenance_id" id="accomplish_idmachine">
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="obs" class="control-label">Observação</label>
-                                <textarea class="form-control" name="obs" id="obs"></textarea>
+                                <label for="note" class="control-label">Observação</label>
+                                <textarea class="form-control" name="note" id="note"></textarea>
                             </div>
                         </div>
                     </div>

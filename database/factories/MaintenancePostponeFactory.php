@@ -2,16 +2,17 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Models\MaintenanceCheck;
+use App\Model;
+use App\Models\MaintenancePostpone;
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
-    
-$factory->define(MaintenanceCheck::class, function (Faker $faker) {
+
+$factory->define(MaintenancePostpone::class, function (Faker $faker) {
     return [
         'maintenance_id' => '1',
         'user_id' => '1',
-        'price' => $faker->randomNumber(3),
+        'postpone_months' => $faker->randomNumber(1),
+        'postpone_hodometro' => $faker->randomNumber(2),
         'note' => 'Nota checagem',
-        'hodometro' => $faker->randomNumber(3),
     ];
 });

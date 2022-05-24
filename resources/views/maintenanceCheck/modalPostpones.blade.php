@@ -12,7 +12,7 @@
                             <div class="form-group">
                                 <label for="postpone_hodometro" class="control-label">Realizar manutenção a partir de tantas Horas:</label>
                                 <input type="number" name="postpone_hodometro" id="postpone_hodometro" class="form-control" min="0" value="0" required>
-                                <input type="hidden" name="id" id="postpone_maintenance_id">
+                                <input type="hidden" name="maintenance_id" id="postpone_maintenance_id">
                             </div>
                         </div>
                         <div class="col-md-12">

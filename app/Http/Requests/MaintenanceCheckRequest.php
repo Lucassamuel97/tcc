@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class BookRequest extends FormRequest
+class MaintenanceCheckRequest extends FormRequest
 {
     public function authorize()
     {
@@ -14,15 +14,15 @@ class BookRequest extends FormRequest
     public function rules()
     {
         return [
-            'title'=>'required',
-            'pages'=>'required|numeric' 
+            'maintenance_id'=>'required',
+            'price'=>'numeric'
         ];
     }
 
     public function messages(){
         return [
-            'title.required' => 'Coloque o titulo',
-            'pages.numeric' => 'Coloque numeros para as paginas'
+            'maintenance_id.required' => 'Erro: maquinario não selecionado.',
+            'price.numeric' => 'Coloque somente numeros no preco.'
         ];
     }
 }
