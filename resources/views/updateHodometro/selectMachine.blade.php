@@ -83,7 +83,7 @@
                             <div class="form-group">
                                 <label for="hodometro" class="control-label">Hodômetro:</label>
                                 <input type="number" name="hodometro" id="hodometro" class="form-control" onchange="confereHodometro()" min="" value="" required>
-                                <input type="hidden" name="id" id="machine_id">
+                                <input type="hidden" name="machine_id" id="machine_id">
                             </div>
                         </div>
                     </div>

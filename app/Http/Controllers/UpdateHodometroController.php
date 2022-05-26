@@ -37,18 +37,18 @@ class UpdateHodometroController extends Controller
         $id_user = Auth::id(); 
         
         $cad = $this->objUpdateHodometro->create([
-            'machine_id'    => $request->id,
+            'machine_id'    => $request->machine_id,
             'user_id'        => $id_user,
             'hodometro'      => $request->hodometro
         ]);
         
         if($cad){
             
-            $this->objMachine->where(['id'=>$request->id])->update([
+            $this->objMachine->where(['id'=>$request->machine_id])->update([
                 'hodometro' => $request->hodometro
             ]);
             
-            $machine = $this->objMachine->find($request->id);
+            $machine = $this->objMachine->find($request->machine_id);
             //Retorna quantidade de manutenções expiradas
             $maintenances = $machine->relMaintenances()->whereRaw("(CAST(limit_hodometro as char) - $request->hodometro) <= 0")->count();
                             
