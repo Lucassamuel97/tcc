@@ -1,6 +1,6 @@
 (function(win,doc){
     'use strict';
-
+        
     //Delete
     function confirmDel(event)
     {
@@ -24,10 +24,20 @@
             return false;
         }
     }
+
     if(doc.querySelector('.js-del')){
         let btn=doc.querySelectorAll('.js-del');
         for(let i=0; i < btn.length; i++){
             btn[i].addEventListener('click',confirmDel,false);
         }
     }
+        
+    if(document.getElementById("order")){
+        document.getElementById("order").addEventListener("change", filter);
+    }
+
+    function filter(e){
+        document.getElementById("filters").submit();
+    }
+
 })(window,document);

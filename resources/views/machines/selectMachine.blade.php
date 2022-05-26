@@ -17,8 +17,7 @@
 		@endforeach
 	</div>
 	@endif
-
-
+	
 	<form action="">
 		<div class="row mb-2">
 			<div class="col-md-7 offset-md-3">
@@ -51,7 +50,7 @@
                     <a class="btn btn-outline-success" href="{{url("maintenance/$machine->id/create")}}" title="Cadastrar Manutenção"> 
                         <i class="fas fa-plus"></i> CADASTRAR MANUTENÇÃO
 					</a>
-                    <a class="btn btn-outline-info" href="{{url("machines/$machine->id/edit")}}" title="Checagem de Manutenção"> 
+                    <a class="btn btn-outline-info" href="{{url("$machine->id/maintenanceCheck/")}}" title="Checagem de Manutenção"> 
                         <i class="far fa-check-square"></i> CHECAGEM DE MANUTENÇÕES
 					</a>
 				</td>

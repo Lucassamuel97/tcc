@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Machine;
 use App\Http\Requests\MachineRequest;
+use QRCode;
 
 class MachinesController extends Controller
 {
@@ -32,11 +33,6 @@ class MachinesController extends Controller
 
         return view('machines/index',compact('machines', 'search'));
     }
-
-    // public function index(){
-    //     $machines = $this->objMachine->paginate(5);
-    //     return view('machines/index',compact('machines'));
-    // }
 
     public function create(){
       return view('machines/create');
@@ -100,5 +96,19 @@ class MachinesController extends Controller
         }
 
         return($del)?"sim":"não";
+    }
+
+    public function qrcode($machine)
+    {
+        return  QRCode::url('http://192.168.0.102/laravel/manutencao/public/'.$machine.'/maintenanceCheck')
+                  ->setSize(8)
+                  ->setMargin(2)
+                  ->png();
+    }
+
+    public function qrcodePrint($machine)
+    {
+        $machine = $this->objMachine->find($machine);
+        return view('machines/qrcode', compact('machine'));
     }
 }

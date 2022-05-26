@@ -20,9 +20,7 @@
 
 </head>
 <body id="page-top">
-
     <div id="wrapper">
-
         <!-- MENU -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
@@ -35,22 +33,42 @@
             <hr class="sidebar-divider my-0">
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('register')}}">
-                    <i class="fas fa-fw fa-tachometer-alt"></i> Home
+                    <i class="fas fa-fw fa-tachometer-alt"></i> <span>Home</span>
                 </a>
             </li>
             @auth
             <?php if (Auth::user()->is_admin): ?>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{url('users')}}"><i class="fas fa-users"></i>Usuários</a>
+                    <a class="nav-link" href="{{url('users')}}"><i class="fas fa-users"></i>
+                        <span>Usuários</span>
+                    </a>
                 </li>
             <?php endif ?>
             @endauth
             <li class="nav-item">
-                <a class="nav-link" href="{{url('machines')}}"><i class="fas fa-tractor"></i> Maquinários</a>
+                <a class="nav-link" href="{{url('machines')}}"><i class="fas fa-tractor"></i> <span>Maquinários</span></a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="{{url('selectMachine')}}"><i class="fa fa-cogs" aria-hidden="true"></i> Manutenções</a>
+                <a class="nav-link" href="{{url('selectMachine')}}"><i class="fa fa-cogs" aria-hidden="true"></i> <span>Manutenções</span> </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{url('updateHodometro')}}"><i class="far fa-clock"></i> <span>Lançar Hodômetro</span></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-file-alt"></i>
+                     <span>Relatórios</span>
+                </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{url('report/maintenances')}}">Manutenções</a>
+                        <a class="collapse-item" href="{{url('report/maintenances/expenses')}}">Gastos com manutenções</a>
+                    </div>
+                </div>
             </li>
            
             <hr class="sidebar-divider d-none d-md-block">
@@ -79,29 +97,6 @@
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
-                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                        <li class="nav-item dropdown no-arrow d-sm-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-search fa-fw"></i>
-                        </a>
-                        <!-- Dropdown - Messages -->
-                        <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                        aria-labelledby="searchDropdown">
-                        <form class="form-inline mr-auto w-100 navbar-search">
-                            <div class="input-group">
-                                <input type="text" class="form-control bg-light border-0 small"
-                                placeholder="Search for..." aria-label="Search"
-                                aria-describedby="basic-addon2">
-                                <div class="input-group-append">
-                                    <button class="btn btn-primary" type="button">
-                                        <i class="fas fa-search fa-sm"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </li>
 
                 <div class="topbar-divider d-none d-sm-block"></div>
                 @auth
@@ -186,8 +181,9 @@ aria-hidden="true">
 <script src="{{url('assets/vendor/jquery/jquery.min.js')}}"> </script>
 <script src="{{url('assets/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"> </script>
 <script src="{{url('assets/vendor/jquery-easing/jquery.easing.min.js')}}"> </script>
-<script src="{{url('assets/js/sb-admin-2.min.js')}}"> </script>
+<script src="{{url('assets/js/sb-admin-2.js')}}"> </script>
 <script src="{{url('assets/js/javascript.js')}}"></script>
+<script src="{{url('assets/js/app.js')}}"></script>
 
 </body>
 </html>
