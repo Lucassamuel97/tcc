@@ -60,9 +60,14 @@
 					<a class="btn btn-outline-primary" target="_blank" href="{{url("/machines/$machine->id/qrcode/print")}}" title="Imprimir QRCODE"> 
 						<i class="fas fa-qrcode"></i>
 					</a>
-					<a class="js-del btn btn-outline-danger" title="Deletar" href="{{url("machines/$machine->id")}}">
-						<i class="fas fa-trash-alt"></i>
-					</a>
+
+					@auth
+		            <?php if (Auth::user()->is_admin): ?>
+						<a class="js-del btn btn-outline-danger" title="Deletar" href="{{url("machines/$machine->id")}}">
+							<i class="fas fa-trash-alt"></i>
+						</a>
+		            <?php endif ?>
+		            @endauth
 				</td>
 			</tr>
 			@endforeach

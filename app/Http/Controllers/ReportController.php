@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Maintenance;
 use App\Models\Machine;
@@ -55,6 +56,10 @@ class ReportController extends Controller
             ->join('users', 'users.id', '=', 'user_id')
             ->join('maintenances', 'maintenance_postpones.maintenance_id', '=', 'maintenances.id')
             ->join('machines', 'machine_id', '=', 'machines.id');
+
+        if (!Auth::user()->is_admin) {   
+            $request->user = Auth::id(); 
+        }
 
         //Filtra usuario
         if($request->user){
@@ -121,6 +126,10 @@ class ReportController extends Controller
             ->join('maintenances', 'maintenance_checks.maintenance_id', '=', 'maintenances.id')
             ->join('machines', 'machine_id', '=', 'machines.id');
 
+        if (!Auth::user()->is_admin) {   
+            $request->user = Auth::id(); 
+        }
+        
         //Filtra usuario
         if($request->user){
             $queryCheks->where('users.id', '=', $request->user);
