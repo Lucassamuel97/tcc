@@ -13,6 +13,6 @@ class UpdateHodometro extends Model{
 	}
 
 	public function relMachine(){
-		return $this->hasOne('App\Models\Machine','machine_id','id');
+		return $this->hasOne('App\Models\Machine','id','machine_id');
  	}
 }

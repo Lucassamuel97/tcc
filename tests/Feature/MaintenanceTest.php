@@ -26,26 +26,44 @@ class MaintenanceTest extends TestCase
     public function authenticated_user_can_read_all_the_maintenances()
     {
         $this->withoutExceptionHandling();
-        $this->signIn();
+        $user = factory(User::class)->create();
+        $this->signIn($user);
 
         $machine = factory(Machine::class)->create();
 
         $maintenance1 = factory(Maintenance::class)->create([
             'description' => 'Trocar Filtro', 
             'machine_id'=>  $machine->id,
+            'user_id'=> $user->id,
         ]);
 
         $maintenance2 = factory(Maintenance::class)->create([
             'description' => 'Revisar freios', 
             'machine_id'=>  $machine->id,
+            'user_id'=> $user->id,
         ]);
 
         
         $response = $this->get('/maintenance/'.$machine->id);
-
         $response->assertSee($maintenance1->description);
         $response->assertSee($maintenance2->description);
+
+        $response = $this->json('GET','maintenance/'.$machine->id, ['q'=> $maintenance1->description]);
+        $response->assertSee($maintenance1->description);
     }
+
+     /** @test */
+     public function authenticated_users_can_create_form_a_new_maintenance()
+     {
+         $this->withoutExceptionHandling();
+         $this->signIn();
+ 
+         $machine = factory(Machine::class)->create();
+         $response = $this->get('/maintenance/'.$machine->id.'/create');
+         $response->assertSee($machine->description);
+         $response->assertSee("Cadastro de Manutenções");
+         
+     }
 
     /** @test */
     public function authenticated_users_can_create_a_new_maintenance()
@@ -79,16 +97,19 @@ class MaintenanceTest extends TestCase
 
     /** @test */
     public function a_user_can_read_a_maintenance_to_edit()
-    {
+    {        
         $this->withoutExceptionHandling();
-        $this->signIn();
-  
+        $user = factory(User::class)->create();
+        $this->signIn($user);
+
         $machine = factory(Machine::class)->create();
+
         $maintenance = factory(Maintenance::class)->create([
             'description' => 'Trocar Filtro', 
             'machine_id'=>  $machine->id,
+            'user_id'=> $user->id,
         ]);
-        
+
         $response = $this->get('/maintenance/'.$maintenance->id.'/edit/');
 
         $response->assertSee($maintenance->description)
@@ -114,12 +135,15 @@ class MaintenanceTest extends TestCase
     public function the_user_can_update_the_maintenance(){
         
         $this->withoutExceptionHandling();
-        $this->signIn();
+        $user = factory(User::class)->create();
+        $this->signIn($user);
 
         $machine = factory(Machine::class)->create();
+
         $maintenance = factory(Maintenance::class)->create([
             'description' => 'Trocar Filtro', 
             'machine_id'=>  $machine->id,
+            'user_id'=> $user->id,
         ]);
         
         $maintenance->description = "Troca filtro atualizado";
@@ -152,15 +176,47 @@ class MaintenanceTest extends TestCase
     /** @test */
     public function authorized_user_can_delete_the_maintenance(){
 
-        $this->signIn();
+        $this->withoutExceptionHandling();
+        $user = factory(User::class)->create();
+        $this->signIn($user);
 
         $machine = factory(Machine::class)->create();
+
         $maintenance = factory(Maintenance::class)->create([
+            'description' => 'Trocar Filtro', 
             'machine_id'=>  $machine->id,
+            'user_id'=> $user->id,
         ]);
 
         $this->delete('/maintenance/'.$maintenance->id);
 
         $this->assertDatabaseMissing('maintenances',['id'=> $maintenance->id]);
     }
+
+     /** @test */
+     public function authenticated_user_can_read_selectMachines()
+     {
+         $this->withoutExceptionHandling();
+         $user = factory(User::class)->create();
+         $this->signIn($user);
+ 
+         $machine = factory(Machine::class)->create();
+          
+         $response = $this->get('selectMachine/');
+
+         $response->assertSee($machine->description);
+     }
+
+     /** @test */
+     public function authenticated_user_can_read_selectMachines_filter()
+     {
+         $this->withoutExceptionHandling();
+         $user = factory(User::class)->create();
+         $this->signIn($user);
+ 
+         $machine = factory(Machine::class)->create();
+
+         $response = $this->json('GET','selectMachine/',['q'=> $machine->description]);
+         $response->assertSee($machine->description);
+     }
 }

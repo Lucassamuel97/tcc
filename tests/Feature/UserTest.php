@@ -38,6 +38,16 @@ class UserTest extends TestCase
     }
 
     /** @test */
+    public function authenticated_users_can_create_form_a_new_user()
+    {
+        $this->withoutExceptionHandling();
+        $this->signIn();
+
+        $response = $this->get('/users/create');
+        $response->assertSee('Cadastrar');
+    }
+
+    /** @test */
     public function authenticated_users_can_create_a_new_user()
     {
         $this->signIn();

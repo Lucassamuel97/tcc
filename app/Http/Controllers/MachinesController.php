@@ -94,7 +94,6 @@ class MachinesController extends Controller
         if($del){
             session()->flash('message', 'Máquinario deletado com sucesso');
         }else{
-            echo "ook";
             session()->flash('message', 'Erro ao deletar o maquinário');
         }
 

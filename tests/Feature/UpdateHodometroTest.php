@@ -36,6 +36,12 @@ class UpdateHodometroTest extends TestCase
 
         $response->assertSee($machine->description);
         $response->assertSee($machine2->description);
+
+
+        $response = $this->json('GET','/updateHodometro', [
+            'q'=> $machine->description,
+        ]); 
+        $response->assertSee($machine->description);
     }
 
     /** @test */
