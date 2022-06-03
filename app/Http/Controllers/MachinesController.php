@@ -103,10 +103,11 @@ class MachinesController extends Controller
     public function qrcode($machine)
     {   
         $machine = $this->objMachine->find($machine);
-        return  QRCode::url(url('/updateHodometro?q='.$machine->identification_number))
+        $img = QRCode::url(url('/updateHodometro?q='.$machine->identification_number))
                   ->setSize(8)
                   ->setMargin(2)
                   ->png();
+        return response($img)->header('Content-type','image/png');
     }
 
     public function qrcodePrint($machine)
