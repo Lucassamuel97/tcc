@@ -28,10 +28,6 @@ class MachineRequest extends FormRequest
             'identification_number.required' => 'Coloque o N° de Identificação'
         ];
     }
-
-    public function after(){
-        $description = $request->old('description');
-    }
 }
 
 

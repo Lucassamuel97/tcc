@@ -31,4 +31,13 @@ class HomeTest extends TestCase
 
         $response->assertSee("Dashboard");
     }
+
+    /** @test */
+    public function logout_user()
+    {
+        $this->withoutExceptionHandling();
+        $this->signIn();
+     
+        $response = $this->post('/logout')->assertRedirect('/');
+    }
 }
