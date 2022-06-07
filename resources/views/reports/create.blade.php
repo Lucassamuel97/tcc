@@ -23,6 +23,9 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="form-row">
+
+				    @auth
+            		<?php if (Auth::user()->is_admin): ?>
 					<div class="form-group col-md-6">
 						<label for="user" class="col-form-label">Usuario Responsavel: </label>
 						<select class="form-control" name="user" id="user">
@@ -34,6 +37,8 @@
 							@endif
 						</select>
 					</div>
+					<?php endif ?>
+            		@endauth
 
 					<div class="form-group col-md-6">
 						<label for="machine" class="col-form-label">Maquinario: </label>

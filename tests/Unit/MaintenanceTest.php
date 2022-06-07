@@ -2,7 +2,9 @@
 
 namespace Tests\Unit;
 use App\Models\Maintenance;
-use PHPUnit\Framework\TestCase;
+use App\Models\Machine;
+use Tests\TestCase;
+use App\User;
 
 class MaintenanceTest extends TestCase
 {
@@ -26,5 +28,22 @@ class MaintenanceTest extends TestCase
          $arrayCompared = array_diff($expected, $maintenance->getFillable());
  
          $this->assertEquals(0,count($arrayCompared));
+     }
+
+     /** @test */
+     public function checks_relation_with_machine()
+     {
+        $user = factory(User::class)->create();
+        $machine = factory(Machine::class)->create();
+
+        $maintenance = factory(Maintenance::class)->create([
+            'description' => 'Trocar Filtro', 
+            'machine_id'=>  $machine->id,
+            'user_id'=> $user->id,
+        ]);
+
+        $machine2 = $maintenance->relMachine;
+        
+        $this->assertEquals($machine->id,$machine2->id);
      }
 }

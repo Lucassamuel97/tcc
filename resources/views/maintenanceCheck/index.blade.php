@@ -69,7 +69,8 @@
 				</td>
 				<td class="{{ $maintenance->days <=  30 ? $maintenance->days <= 0 ? 'fd-danger':'fd-warning' : ''  }}">
 					Data prevista: <b>{{date('d/m/Y', strtotime($maintenance->limit_date))}}</b><br>
-					Dias restantes: <b>{{$maintenance->days}} d</b>
+					{{ $maintenance->days <= 0 ? 'Atrasada em:' : 'Dias restantes:'}}
+					 <b>{{abs($maintenance->days)}} Dias</b> </td>
 				</td>		
 				<td class="text-center">
 					<button class="demo-delete-row btn btn-success btn-xs btn-icon" onclick="accomplish({{$maintenance->id}},'{{$maintenance->description}}')" data-toggle="modal" data-target="#con-accomplish-modal">
