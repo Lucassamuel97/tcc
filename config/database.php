@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Str;
 
+$DATABASE_URL = parse_url('mysql://b9efbe3102c03b:8be00451@us-cdbr-east-05.cleardb.net/heroku_481fdffe44f212e?reconnect=true');
+
 return [
 
     /*
@@ -45,12 +47,12 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
-            'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST', '127.0.0.1'),
+            'url' => 'mysql://b9efbe3102c03b:8be00451@us-cdbr-east-05.cleardb.net/heroku_481fdffe44f212e?reconnect=true',
+            'host' => $DATABASE_URL["host"],
             'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
+            'database' => ltrim($DATABASE_URL["path"], "/"),
+            'username' => $DATABASE_URL["user"],
+            'password' => $DATABASE_URL["pass"],
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
@@ -89,6 +91,23 @@ return [
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
+        ],
+
+        'testing' => [
+            'driver'             => 'mysql',
+            'host'               => env('DB_HOST', '127.0.0.1'),
+            'port'               => env('DB_PORT', '3306'),
+            'database'           => env('DB_DATABASE', 'testing'),
+            'username'           => env('DB_USERNAME', 'root'),
+            'password'           => env('DB_PASSWORD', ''),
+            'unix_socket'        => env('DB_SOCKET', ''),
+            'charset'            => 'utf8mb4',
+            'collation'          => 'utf8mb4_unicode_ci',
+            'prefix'             => '',
+            'strict'             => true,
+            'engine'             => null,
+            'options'            => [PDO::MYSQL_ATTR_LOCAL_INFILE => true],
+            'max_allowed_packet' => '500M',
         ],
 
     ],

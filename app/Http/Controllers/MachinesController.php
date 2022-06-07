@@ -91,19 +91,23 @@ class MachinesController extends Controller
     {
         $del = $this->objMachine->destroy($id);
 
-        if ($del) {
+        if($del){
             session()->flash('message', 'Máquinario deletado com sucesso');
+        }else{
+            session()->flash('message', 'Erro ao deletar o maquinário');
         }
 
         return($del)?"sim":"não";
     }
 
     public function qrcode($machine)
-    {
-        return  QRCode::url('http://192.168.0.102/laravel/manutencao/public/'.$machine.'/maintenanceCheck')
+    {   
+        $machine = $this->objMachine->find($machine);
+        $img = QRCode::url(url('/updateHodometro?q='.$machine->identification_number))
                   ->setSize(8)
                   ->setMargin(2)
                   ->png();
+        return response($img)->header('Content-type','image/png');
     }
 
     public function qrcodePrint($machine)

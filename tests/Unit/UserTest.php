@@ -2,6 +2,7 @@
 
 namespace Tests\Unit;
 
+use Illuminate\Foundation\Testing\WithFaker;
 use PHPUnit\Framework\TestCase;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;

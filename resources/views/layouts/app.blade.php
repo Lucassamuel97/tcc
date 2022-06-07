@@ -9,6 +9,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+    <link rel="shortcut icon" href="{{url('assets/img/favicon.png')}}">
+
     <title>Manutenções Preventivas</title>
 
     <!-- Custom fonts for this template-->

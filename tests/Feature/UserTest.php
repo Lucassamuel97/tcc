@@ -35,6 +35,20 @@ class UserTest extends TestCase
         $response->assertSee($user->name);
         $response->assertSee($user->email);
         $response->assertSee($user2->name);
+
+        
+        $response = $this->json('GET','/users', ['q'=> $user->name]);
+        $response->assertSee($user->name);
+    }
+
+    /** @test */
+    public function authenticated_users_can_create_form_a_new_user()
+    {
+        $this->withoutExceptionHandling();
+        $this->signIn();
+
+        $response = $this->get('/users/create');
+        $response->assertSee('Cadastrar');
     }
 
     /** @test */
@@ -103,6 +117,30 @@ class UserTest extends TestCase
         ];
 
         $this->post('/users', $user)
+            ->assertSessionHasErrors('name')
+            ->assertSessionHasErrors('email')
+            ->assertSessionHasErrors('password');
+    }
+
+    /** @test */
+    public function user_update_validation(){
+
+        $this->withoutExceptionHandling();
+        $this->signIn();
+
+        $user = factory(User::class)->create([
+            'is_admin' => 1,
+        ]);
+
+        $userUpdate = [
+            "name" => null,
+            "is_admin" => "0",
+            "email" => null,
+            "password" => null,
+            "password_confirmation" => "12345678"
+        ];
+
+        $this->put('/users/'.$user->id, $userUpdate)
             ->assertSessionHasErrors('name')
             ->assertSessionHasErrors('email')
             ->assertSessionHasErrors('password');

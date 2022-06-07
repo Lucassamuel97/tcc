@@ -35,6 +35,19 @@ class MachineTest extends TestCase
 
         $response->assertSee($machine->description);
         $response->assertSee($machine2->description);
+    
+        $response = $this->json('GET', '/machines' ,['q'=>$machine->description]);
+        $response->assertSee($machine->description);
+    }
+
+    /** @test */
+    public function authenticated_users_can_create_form()
+    {
+        $this->withoutExceptionHandling();
+        $this->signIn();
+
+        $response = $this->get('/machines/create');
+        $response->assertSee("Cadastrar");
     }
 
     /** @test */
@@ -49,13 +62,13 @@ class MachineTest extends TestCase
         $this->assertEquals(1, Machine::all()->count());
     }
 
-     /** @test */
-     public function unauthenticated_users_cannot_create_a_machine()
-     {
-        $machine = factory(Machine::class)->make();
-        $this->post('/machines', $machine->toArray())     
-         ->assertRedirect('/login');
-     }
+    /** @test */
+    public function unauthenticated_users_cannot_create_a_machine()
+    {
+       $machine = factory(Machine::class)->make();
+       $this->post('/machines', $machine->toArray())     
+        ->assertRedirect('/login');
+    }
 
     /** @test */
     public function a_user_can_read_a_machine()
@@ -72,19 +85,19 @@ class MachineTest extends TestCase
     }
 
 
-     /** @test */
-     public function a_user_can_read_a_machine_to_edit()
-     {
-         $this->withoutExceptionHandling();
-         $this->signIn();
+    /** @test */
+    public function a_user_can_read_a_machine_to_edit()
+    {
+        $this->withoutExceptionHandling();
+        $this->signIn();
  
-         $machine = factory(Machine::class)->create();
-         
-         $response = $this->get('/machines/'.$machine->id.'/edit');
+        $machine = factory(Machine::class)->create();
+        
+        $response = $this->get('/machines/'.$machine->id.'/edit');
  
-         $response->assertSee($machine->description)
-             ->assertSee($machine->hodometro);
-     }
+        $response->assertSee($machine->description)
+            ->assertSee($machine->hodometro);
+    }
 
     /** @test */
     public function machine_registration_validation(){
@@ -140,4 +153,42 @@ class MachineTest extends TestCase
 
         $this->assertDatabaseMissing('machines',['id'=> $machine->id]);
     }
+
+    /** @test */
+    public function authorized_user_can_delete_error_the_machine(){
+
+        $this->signIn();
+
+        $machine = factory(Machine::class)->create();
+
+        $response = $this->delete('/machines/100');
+        $response->assertSee('não');
+    }
+
+    /** @test */
+    public function a_user_can_read_qrcode_print_a_machine()
+    {
+        $this->withoutExceptionHandling();
+        $this->signIn();
+
+        $machine = factory(Machine::class)->create();
+        
+        $response = $this->get('/machines/'.$machine->id.'/qrcode/print');
+
+        $response->assertSee($machine->description)
+            ->assertSee($machine->identification_number);
+    }
+
+     /** @test */
+     public function a_user_can_read_qrcode_a_machine()
+     {
+         $this->withoutExceptionHandling();
+         $this->signIn();
+ 
+         $machine = factory(Machine::class)->create();
+         
+         $response = $this->get('/machines/'.$machine->id.'/qrcode');
+ 
+         $response->assertStatus(200);
+     }
 }
