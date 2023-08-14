@@ -11,6 +11,7 @@ class MachineTest extends TestCase
     {
         $machine = new Machine;
 
+        
         $expected = [
             'manufacturer',
             'status',
